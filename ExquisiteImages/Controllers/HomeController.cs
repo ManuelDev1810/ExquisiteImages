@@ -5,23 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using ExquisiteImages.Models;
-using Newtonsoft.Json;
+using ExquisiteImages.Infrastructure.ImageClient;
 
 namespace ExquisiteImages.Controllers
 {
     public class HomeController : Controller
     {
-        static HttpClient client = new HttpClient
+        IImageClient imageClient;
+        public HomeController(IImageClient imgClient)
         {
-            BaseAddress = new Uri("http://localhost:7001/")
-        };
+            imageClient = imgClient;
+        }
 
         public async Task<IActionResult> Index()
         {
-            HttpResponseMessage response = await client.GetAsync("/api/home");
-            string stringResponse = await response.Content.ReadAsStringAsync();
-            List<Image> Images = JsonConvert.DeserializeObject<List<Image>>(stringResponse);
-            return View(Images);
+            List<Image> images = await imageClient.Get();
+            return View(images);
         }
     }
 }

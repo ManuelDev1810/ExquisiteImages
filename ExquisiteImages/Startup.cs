@@ -10,6 +10,7 @@ using ExquisiteImages.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using ExquisiteImages.Infrastructure.ImageClient;
 
 namespace ExquisiteImages
 {
@@ -25,13 +26,19 @@ namespace ExquisiteImages
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //Db Context
             services.AddDbContext<AppIdentityDbContext>(opts => {
                 opts.UseSqlServer(Configuration["Data:ExquisiteUsers:ConnectionString"]);
             });
 
+            //Identity
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
+
+            //Dependecy Injections
+            services.AddTransient<IImageClient, ImageClient>();
+
             services.AddMvc();
         }
 
