@@ -10,22 +10,38 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using ExquisiteImagesApi.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace ExquisiteImagesApi
 {
     public class Startup
     {
+
+        IConfiguration Configuration;
+
+        public Startup(IConfiguration config)
+        {
+            Configuration = config;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddCors(options => {
                 options.AddPolicy("AllowSpecificOrigin", builder => builder.WithOrigins("http://localhost:7000/")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials()
-                );
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    );
             });
+
+            services.AddDbContext<ApplicationDbContext>(options => {
+                options.UseSqlServer(Configuration["Data:ExquisiteModels:ConnectionString"]);
+            });
+
             services.AddMvc();
 
             //Applying cors Globally

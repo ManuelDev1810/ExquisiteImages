@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
-namespace ExquisiteImagesApi.Models
+namespace ExquisiteImages.Models
 {
     public class Comment
     {
-        public int CommentId { get; set; }
+        public int CoomentId { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]

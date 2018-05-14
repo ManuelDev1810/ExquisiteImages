@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace ExquisiteImagesApi.Models
+namespace ExquisiteImages.Models
 {
     public class Image
     {
@@ -13,7 +13,5 @@ namespace ExquisiteImagesApi.Models
         public string Name { get; set; }
         [Required]
         public string Path { get; set; }
-
-        public List<Comment> Comments { get; set; }
     }
 }
