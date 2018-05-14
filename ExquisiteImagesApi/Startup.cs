@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace ExquisiteImagesApi
 {
@@ -18,7 +19,19 @@ namespace ExquisiteImagesApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => {
+                options.AddPolicy("AllowSpecificOrigin", builder => builder.WithOrigins("http://localhost:7000/")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                );
+            });
             services.AddMvc();
+
+            //Applying cors Globally
+            services.Configure<MvcOptions>(options => {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,6 +41,7 @@ namespace ExquisiteImagesApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("AllowSpecificOrigin");
             app.UseMvc();
         }
     }
