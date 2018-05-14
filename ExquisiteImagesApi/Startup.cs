@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace ExquisiteImagesApi
 {
@@ -25,7 +28,6 @@ namespace ExquisiteImagesApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvc();
         }
     }

@@ -6,15 +6,32 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using ExquisiteImages.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ExquisiteImages
 {
     public class Startup
     {
+        IConfiguration Configuration;
+        public Startup(IConfiguration confi)
+        {
+            Configuration  = confi;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppIdentityDbContext>(opts => {
+                opts.UseSqlServer(Configuration["Data:ExquisiteUsers:ConnectionString"]);
+            });
+
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
             services.AddMvc();
         }
 
@@ -27,6 +44,7 @@ namespace ExquisiteImages
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
     }
