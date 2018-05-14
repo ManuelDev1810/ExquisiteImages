@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using ExquisiteImagesApi.Models;
 using Microsoft.Extensions.Configuration;
+using ExquisiteImagesApi.Services.Interfaces;
+using ExquisiteImagesApi.Services.Repositories;
 
 namespace ExquisiteImagesApi
 {
@@ -30,6 +32,7 @@ namespace ExquisiteImagesApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //Cors
             services.AddCors(options => {
                 options.AddPolicy("AllowSpecificOrigin", builder => builder.WithOrigins("http://localhost:7000/")
                     .AllowAnyHeader()
@@ -38,9 +41,13 @@ namespace ExquisiteImagesApi
                     );
             });
 
+            //Db Context
             services.AddDbContext<ApplicationDbContext>(options => {
                 options.UseSqlServer(Configuration["Data:ExquisiteModels:ConnectionString"]);
             });
+
+            //Dependecy Injection
+            services.AddTransient<IImageRepository, ImageReposiory>();
 
             services.AddMvc();
 
@@ -57,6 +64,7 @@ namespace ExquisiteImagesApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages();
             app.UseCors("AllowSpecificOrigin");
             app.UseMvc();
         }

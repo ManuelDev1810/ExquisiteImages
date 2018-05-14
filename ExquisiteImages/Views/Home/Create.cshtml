@@ -1,0 +1,19 @@
+﻿@model Image
+
+<form method="post" action="Create">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input type="text" class="form-control" asp-for="Name" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageId"></label>
+        <input type="text" class="form-control" asp-for="ImageId" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Path"></label>
+        <input type="text" class="form-control" asp-for="Path" />
+    </div>
+</form>
