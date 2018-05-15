@@ -1,6 +1,10 @@
 ﻿@model Image
 
-<form method="post" action="Create">
+@{ 
+    Layout = "_Layout";
+}
+
+<form method="post" asp-action="Create">
 
     <div class="form-group">
         <label asp-for="Name"></label>
@@ -8,12 +12,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="ImageId"></label>
-        <input type="text" class="form-control" asp-for="ImageId" />
-    </div>
-
-    <div class="form-group">
         <label asp-for="Path"></label>
         <input type="text" class="form-control" asp-for="Path" />
     </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>

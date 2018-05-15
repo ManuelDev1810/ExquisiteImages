@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ExquisiteImagesApi.Migrations
 {
-    public partial class CreatingModelsApi : Migration
+    public partial class InitialingMoDELS : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,19 +15,12 @@ namespace ExquisiteImagesApi.Migrations
                 {
                     ImageId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ImageId1 = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     Path = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Images", x => x.ImageId);
-                    table.ForeignKey(
-                        name: "FK_Images_Images_ImageId1",
-                        column: x => x.ImageId1,
-                        principalTable: "Images",
-                        principalColumn: "ImageId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,11 +49,6 @@ namespace ExquisiteImagesApi.Migrations
                 name: "IX_Comments_ImageId",
                 table: "Comments",
                 column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Images_ImageId1",
-                table: "Images",
-                column: "ImageId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

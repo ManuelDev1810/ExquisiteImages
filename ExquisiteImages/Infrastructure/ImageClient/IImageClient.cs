@@ -9,5 +9,6 @@ namespace ExquisiteImages.Infrastructure.ImageClient
     public interface IImageClient
     {
         Task<List<Image>> Get();
+        Task<Image> Create(Image image);
     }
 }

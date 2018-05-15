@@ -9,6 +9,7 @@ using System.Net.Http;
 
 namespace ExquisiteImagesApi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/Home")]
     public class HomeController : Controller
     {
@@ -20,6 +21,13 @@ namespace ExquisiteImagesApi.Controllers
 
         [HttpGet]
         public List<Image> Get() => imageRepository.Images();
+
+        [HttpPost]
+        public async Task<Image> Create([FromBody] Image image)
+        {
+            Image model = await imageRepository.Create(image);
+            return model;
+        }
         
     }
 }

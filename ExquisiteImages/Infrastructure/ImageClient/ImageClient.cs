@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using ExquisiteImages.Models;
 using Newtonsoft.Json;
@@ -21,6 +22,16 @@ namespace ExquisiteImages.Infrastructure.ImageClient
             string stringResponse = await response.Content.ReadAsStringAsync();
             List<Image> images = JsonConvert.DeserializeObject<List<Image>>(stringResponse);
             return images;
+        }
+
+        public async Task<Image> Create(Image model)
+        {
+            string json = JsonConvert.SerializeObject(model);
+            StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage httpResponse = await client.PostAsync("/api/home/", httpContent);
+            string responseContent = await httpResponse.Content.ReadAsStringAsync();
+            Image data = JsonConvert.DeserializeObject<Image>(responseContent);
+            return data;
         }
     }
 }

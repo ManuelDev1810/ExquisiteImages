@@ -22,5 +22,17 @@ namespace ExquisiteImages.Controllers
             List<Image> images = await imageClient.Get();
             return View(images);
         }
+
+        public ViewResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Image model)
+        {
+            Image image = await imageClient.Create(model);
+            return RedirectToAction("Index");
+        }
     }
 }

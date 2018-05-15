@@ -11,8 +11,8 @@ using System;
 namespace ExquisiteImagesApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180514145453_CreatingModelsApi")]
-    partial class CreatingModelsApi
+    [Migration("20180515152246_InitialingMoDELS")]
+    partial class InitialingMoDELS
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,8 +49,6 @@ namespace ExquisiteImagesApi.Migrations
                     b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ImageId1");
-
                     b.Property<string>("Name")
                         .IsRequired();
 
@@ -59,24 +57,15 @@ namespace ExquisiteImagesApi.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.HasIndex("ImageId1");
-
                     b.ToTable("Images");
                 });
 
             modelBuilder.Entity("ExquisiteImagesApi.Models.Comment", b =>
                 {
                     b.HasOne("ExquisiteImagesApi.Models.Image", "Image")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ExquisiteImagesApi.Models.Image", b =>
-                {
-                    b.HasOne("ExquisiteImagesApi.Models.Image")
-                        .WithMany("Images")
-                        .HasForeignKey("ImageId1");
                 });
 #pragma warning restore 612, 618
         }
