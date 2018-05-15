@@ -2,19 +2,25 @@
 
 @{ 
     Layout = "_Layout";
+    ViewBag.HeaderTitle = "Create an Image";
 }
 
+
+<hr style="width:30%;" class="ml-0"/>
 <form method="post" asp-action="Create">
 
     <div class="form-group">
         <label asp-for="Name"></label>
         <input type="text" class="form-control" asp-for="Name" />
+        <small class="form-text text-muted">This field is required</small>
     </div>
 
     <div class="form-group">
         <label asp-for="Path"></label>
         <input type="text" class="form-control" asp-for="Path" />
+        <small class="text-muted form-text">This field is required</small>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-secondary" href="#">Cancel</a>
 </form>

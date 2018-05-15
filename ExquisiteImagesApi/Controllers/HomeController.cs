@@ -10,7 +10,7 @@ using System.Net.Http;
 namespace ExquisiteImagesApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Home")]
+    [Route("api/[controller]")]
     public class HomeController : Controller
     {
         IImageRepository imageRepository;
