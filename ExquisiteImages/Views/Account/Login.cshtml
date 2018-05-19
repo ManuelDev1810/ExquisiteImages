@@ -1,0 +1,24 @@
+﻿@model LoginModel
+
+@{ 
+    Layout = "_Layout";
+    ViewBag.Title = "Log In";
+    ViewBag.HeaderTitle = "Log In";
+}
+
+<div>
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+
+    <button asp-action="Login" type="submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Register" asp-controller="Admin" class="btn btn-secondary">Create an User</a>
+</div>

@@ -1,0 +1,25 @@
+﻿@model CreateUser
+
+@{ 
+    Layout = "_Layout";
+    ViewBag.HeaderTitle = "Create an User";
+}
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
