@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using ExquisiteImages.Models;
 using ExquisiteImages.Infrastructure.ImageClient;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace ExquisiteImages.Controllers
 {
@@ -29,10 +31,33 @@ namespace ExquisiteImages.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Image model)
+        public async Task<IActionResult> Create(Image model, IFormFile img)
         {
-            Image image = await imageClient.Create(model);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if(img != null)
+                {
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", img.FileName);
+                    using(var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await img.CopyToAsync(stream);
+                    }
+
+                    model.Path = "/img/" + img.FileName;
+                    Image image = await imageClient.Create(model);
+                    if (image != null)
+                        return RedirectToAction("Index");
+                    else
+                        return BadRequest(model);
+                } else
+                {
+                    ModelState.AddModelError("", "Please select an Img");
+                    return View(model);
+                }
+            } else
+            {
+                return View(model);
+            }
         }
     }
 }

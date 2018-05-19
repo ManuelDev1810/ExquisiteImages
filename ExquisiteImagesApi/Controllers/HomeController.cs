@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ExquisiteImagesApi.Services.Interfaces;
 using ExquisiteImagesApi.Models;
-using System.Net.Http;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace ExquisiteImagesApi.Controllers
 {
@@ -28,6 +29,6 @@ namespace ExquisiteImagesApi.Controllers
             Image model = await imageRepository.Create(image);
             return model;
         }
-        
+
     }
 }

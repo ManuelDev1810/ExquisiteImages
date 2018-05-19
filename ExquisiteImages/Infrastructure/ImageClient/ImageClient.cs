@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ExquisiteImages.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace ExquisiteImages.Infrastructure.ImageClient
 {
@@ -26,6 +27,7 @@ namespace ExquisiteImages.Infrastructure.ImageClient
 
         public async Task<Image> Create(Image model)
         {
+            //Model
             string json = JsonConvert.SerializeObject(model);
             StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage httpResponse = await client.PostAsync("/api/home/", httpContent);

@@ -12,7 +12,9 @@ namespace ExquisiteImages.Models
         public int ImageId { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
         public string Path { get; set; }
+        [Required]
+        public string Description { get; set; }
     }
+
 }
