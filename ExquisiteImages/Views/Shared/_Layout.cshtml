@@ -15,8 +15,14 @@
 
             <div class="col-4">
                 <div class="row justify-content-end">
-                    <a asp-action="Login" asp-controller="Account" class="col-4 btn btn-primary">Log In</a>
-                    <div class="col-4 btn btn-info ml-1">Genders</div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="col-4 btn btn-primary">Profile</a>
+                        <a asp-action="Logout" asp-controller="Account" class="col-4 btn btn-info ml-1">Log out</a>
+                    } else
+                    {
+                        <a asp-action="Login" asp-controller="Account" class="col-4 btn btn-primary">Log In</a>
+                    }
                 </div> 
             </div>
 
