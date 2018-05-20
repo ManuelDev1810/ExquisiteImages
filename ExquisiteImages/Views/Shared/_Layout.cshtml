@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <header class="row justify-content-between mt-3">
-            <div class="col-3">
+            <div class="col-12 col-sm-12 col-md-3">
                 <h2 class="">Exquisite Images</h2>
             </div>
 
@@ -17,11 +17,11 @@
                 <div class="row justify-content-end">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="col-4 btn btn-primary">Profile</a>
-                        <a asp-action="Logout" asp-controller="Account" class="col-4 btn btn-info ml-1">Log out</a>
+                        <a class="col-11 col-sm-6 col-md-4 btn btn-primary loco">Profile</a>
+                        <a asp-action="Logout" asp-controller="Account" class="col-11 col-sm-5 col-md-4 btn btn-info ml-1">Log out</a>
                     } else
                     {
-                        <a asp-action="Login" asp-controller="Account" class="col-4 btn btn-primary">Log In</a>
+                        <a asp-action="Login" asp-controller="Account" class="col-11 col-sm-11 col-md-4 btn btn-primary">Log In</a>
                     }
                 </div> 
             </div>

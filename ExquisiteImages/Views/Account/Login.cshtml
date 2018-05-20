@@ -6,7 +6,9 @@
     ViewBag.HeaderTitle = "Log In";
 }
 
-<form method="post">
+<div class="row">
+
+<form method="post" class="col">
     <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
 
     <div class="form-group">
@@ -19,6 +21,9 @@
         <input asp-for="Password" class="form-control" />
     </div>
 
-    <button asp-action="Login" type="submit" class="btn btn-primary">Submit</button>
-    <a asp-action="Register" asp-controller="Admin" class="btn btn-secondary">Create an User</a>
+    <button asp-action="Login" type="submit" class="btn btn-outline-primary col-sm-12 col-md-2">Log in</button>
+    <a asp-action="Register" asp-controller="Admin" class="btn btn-outline-secondary col-sm-12 col-md-3">Create an User</a>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-outline-danger col-sm-12 col-md-2">Cancel</a>
 </form>
+
+</div>

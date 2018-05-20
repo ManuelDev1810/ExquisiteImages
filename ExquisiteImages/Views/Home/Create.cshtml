@@ -7,28 +7,31 @@
 }
 
 
-<hr style="width:20%;" class="ml-0"/>
+<div class="row">
 
-<form method="post" asp-action="Create" enctype="multipart/form-data">
-    <div asp-validation-for="All"></div>
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input type="text" class="form-control" asp-for="Name" />
-        <small class="form-text text-muted">This field is required</small>
-    </div>
+    <form method="post" asp-action="Create" enctype="multipart/form-data" class="col">
+        <div asp-validation-for="All"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input type="text" class="form-control" asp-for="Name" />
+            <small class="form-text text-muted">This field is required</small>
+        </div>
 
-    <div class="form-group">
-        <label>Img</label>
-        <input type="file" name="img" />
-        <small class="form-text text-muted">This field is required</small>
-    </div>
+        <div class="form-group">
+            <label  for="img">Img</label>
+            <input type="file" name="img" class="form-control-file" id="img"/>
+            <small class="form-text text-muted">This field is required</small>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" style="max-height:200px;" class="form-control"></textarea>
-        <span class="text-muted form-text">This field is required</span>
-    </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" style="max-height:200px;" class="form-control"></textarea>
+            <span class="text-muted form-text">This field is required</span>
+        </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <a class="btn btn-secondary" asp-action="Index" asp-controller="Home">Cancel</a>
-</form>
+        <button type="submit" class="btn btn-outline-primary col-sm-12 col-md-2">Submit</button>
+        <a class="btn btn-outline-secondary col-sm-12 col-md-2" asp-action="Index" asp-controller="Home">Cancel</a>
+    </form>
+
+
+</div>
