@@ -8,15 +8,18 @@ using ExquisiteImages.Models;
 using ExquisiteImages.Infrastructure.ImageClient;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Identity;
 
 namespace ExquisiteImages.Controllers
 {
     public class HomeController : Controller
     {
         IImageClient imageClient;
-        public HomeController(IImageClient imgClient)
+        UserManager<AppUser> userManager;
+        public HomeController(IImageClient imgClient, UserManager<AppUser> userMgr)
         {
             imageClient = imgClient;
+            userManager = userMgr;
         }
 
         public async Task<IActionResult> Index()
@@ -37,13 +40,20 @@ namespace ExquisiteImages.Controllers
             {
                 if(img != null)
                 {
+                    //Saving the img
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", img.FileName);
                     using(var stream = new FileStream(path, FileMode.Create))
                     {
                         await img.CopyToAsync(stream);
                     }
 
+                    //Getting the current user
+                    AppUser user = await userManager.FindByNameAsync(User.Identity.Name);
+
                     model.Path = "/img/" + img.FileName;
+                    model.UserId = user.Id;
+
+                    //Creating the Image
                     Image image = await imageClient.Create(model);
                     if (image != null)
                         return RedirectToAction("Index");

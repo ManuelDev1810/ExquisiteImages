@@ -17,6 +17,11 @@ namespace ExquisiteImagesApi.Services.Repositories
         }
         public List<Image> Images() => context.Images.Include(m => m.Comments).ToList();
 
+        public List<Image> ImagesOfUser(string UserId)
+        {
+           return context.Images.Include(m => m.Comments).Where(m => m.UserId == UserId).ToList();
+        }
+
         public async Task<Image> Image(int id)
         {
             Image image = await context.Images.Include(m => m.Comments).SingleOrDefaultAsync(m => m.ImageId == id);

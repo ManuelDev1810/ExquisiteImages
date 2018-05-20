@@ -1,0 +1,18 @@
+﻿@model AppUser
+
+@{
+    Layout = "_Layout";
+    ViewBag.HeaderTitle = "Profile";
+    ViewBag.Title = "Profile";
+}
+
+<p>@Model.Email</p>
+<p>@Model.UserName</p>
+<p>@Model.Id</p>
+<img src="@Model.ProfilePicture" />
+
+@foreach (var imagen in Model.Images)
+{
+
+    <img src="@imagen.Path" />
+}

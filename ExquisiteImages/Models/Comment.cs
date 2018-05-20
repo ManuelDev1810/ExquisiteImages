@@ -17,8 +17,12 @@ namespace ExquisiteImages.Models
         [Required]
         public string Details { get; set; }
 
-        public int ImageId { get; set; }
-        [ForeignKey("ImageId")]
-        public Image Image { get; set; }
+        //public int ImageId { get; set; }
+        //[ForeignKey("ImageId")]
+        //public Image Image { get; set; }
+
+        //public string UserId { get; set; }
+        //[ForeignKey("UserId")]
+        //public AppUser User { get; set; }
     }
 }

@@ -7,20 +7,29 @@
 
 <div class="row">
 
-    <form asp-action="Register" method="post" class="col">
+    <form asp-action="Register" method="post" class="col" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" />
+            <span class="form-text text-muted">This field is required</span>
         </div>
 
         <div class="form-group">
             <label asp-for="Email"></label>
             <input asp-for="Email" class="form-control" />
+            <span class="form-text text-muted">This field is required</span>
+        </div>
+
+        <div class="form-group">
+            <label for="img">Image</label>
+            <input type="file" class="form-control-file" name="img" id="img" />
+            <span class="form-text text-muted">This field is required</span>
         </div>
 
         <div class="form-group">
             <label asp-for="Password"></label>
             <input asp-for="Password" class="form-control" />
+            <span class="form-text text-muted">This field is required</span>
         </div>
 
         <button type="submit" class="btn btn-outline-primary col-sm-12 col-md-2">Submit</button>

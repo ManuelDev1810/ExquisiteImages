@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ExquisiteImages.Models;
 using Microsoft.AspNetCore.Identity;
+using ExquisiteImages.Infrastructure.ImageClient;
 
 namespace ExquisiteImages.Controllers
 {
@@ -12,11 +13,13 @@ namespace ExquisiteImages.Controllers
     {
         UserManager<AppUser> userManager;
         SignInManager<AppUser> signInManager;
+        IImageClient imageClient;
 
-        public AccountController(UserManager<AppUser> ustManager, SignInManager<AppUser> signManager)
+        public AccountController(UserManager<AppUser> ustManager, SignInManager<AppUser> signManager, IImageClient imgClient)
         {
             userManager = ustManager;
             signInManager = signManager;
+            imageClient = imgClient;
         }
 
         public ViewResult Login(string returnUrl)
@@ -49,6 +52,15 @@ namespace ExquisiteImages.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<ViewResult> Profile()
+        {
+            
+            AppUser user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<Image> Images = await imageClient.GetByUsers(user.Id);
+            user.Images = Images;
+            return View(user);
         }
     }
 }

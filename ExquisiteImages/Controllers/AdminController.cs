@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace ExquisiteImages.Controllers
 {
@@ -23,22 +25,32 @@ namespace ExquisiteImages.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(CreateUser model)
+        public async Task<IActionResult> Register(CreateUser model, IFormFile img)
         {
             if (ModelState.IsValid)
             {
-                AppUser user = new AppUser
+                if(img != null)
                 {
-                   UserName = model.Name,
-                   Email = model.Email
-                };
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/profile/", img.FileName);
+                    using(var stram = new FileStream(path, FileMode.Create))
+                    {
+                        await img.CopyToAsync(stram);
+                    }
 
-                IdentityResult result = await userManager.CreateAsync(user, model.Password);
+                    AppUser user = new AppUser
+                    {
+                        UserName = model.Name,
+                        Email = model.Email,
+                        ProfilePicture = "/img/profile/" + img.FileName
+                    };
 
-                if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
-                else
-                    AddErrorsFromIdentityResult(result);
+                    IdentityResult result = await userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                        return RedirectToAction("Login", "Account");
+                    else
+                        AddErrorsFromIdentityResult(result);
+                }
             }
             return View("Login", "Account");
         }

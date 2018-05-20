@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ExquisiteImages.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExquisiteImages.Infrastructure.ImageClient
 {
@@ -20,6 +21,14 @@ namespace ExquisiteImages.Infrastructure.ImageClient
         public async Task<List<Image>> Get()
         {
             HttpResponseMessage response = await client.GetAsync("/api/home");
+            string stringResponse = await response.Content.ReadAsStringAsync();
+            List<Image> images = JsonConvert.DeserializeObject<List<Image>>(stringResponse);
+            return images;
+        }
+
+        public async Task<List<Image>> GetByUsers(string UserId)
+        {
+            HttpResponseMessage response = await client.GetAsync("/api/home/" + UserId);
             string stringResponse = await response.Content.ReadAsStringAsync();
             List<Image> images = JsonConvert.DeserializeObject<List<Image>>(stringResponse);
             return images;

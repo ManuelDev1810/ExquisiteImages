@@ -16,6 +16,8 @@ namespace ExquisiteImagesApi.Models
         public string Path { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
         public List<Comment> Comments { get; set; }
     }

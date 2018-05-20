@@ -9,6 +9,7 @@ namespace ExquisiteImagesApi.Services.Interfaces
     public interface IImageRepository
     {
         List<Image> Images();
+        List<Image> ImagesOfUser(string UserId);
         Task<Image> Image(int id);
         Task<Image> Create(Image image);
         Task<Image> Update(Image image);
