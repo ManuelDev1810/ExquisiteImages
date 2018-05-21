@@ -23,7 +23,7 @@ namespace ExquisiteImagesApi.Controllers
         [HttpGet]
         public List<Image> Get() => imageRepository.Images();
 
-        [Route("{UserId}")]
+        [Route("imageofuser/{UserId}")]
         [HttpGet]
         public List<Image> Get([FromRoute] string UserId)
         {

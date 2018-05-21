@@ -36,7 +36,7 @@ namespace ExquisiteImages.Infrastructure.ImageClient
 
         public async Task<List<Image>> GetByUsers(string UserId)
         {
-            HttpResponseMessage response = await client.GetAsync("/api/home/" + UserId);
+            HttpResponseMessage response = await client.GetAsync("/api/home/imageofuser/" + UserId);
             string stringResponse = await response.Content.ReadAsStringAsync();
             List<Image> images = JsonConvert.DeserializeObject<List<Image>>(stringResponse);
             return images;
@@ -44,7 +44,6 @@ namespace ExquisiteImages.Infrastructure.ImageClient
 
         public async Task<Image> Create(Image model)
         {
-            //Model
             string json = JsonConvert.SerializeObject(model);
             StringContent httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage httpResponse = await client.PostAsync("/api/home/", httpContent);
