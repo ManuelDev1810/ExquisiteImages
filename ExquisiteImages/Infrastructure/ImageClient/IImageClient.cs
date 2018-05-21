@@ -10,6 +10,7 @@ namespace ExquisiteImages.Infrastructure.ImageClient
     public interface IImageClient
     {
         Task<List<Image>> Get();
+        Task<Image> GetImg(int id);
         Task<List<Image>> GetByUsers(string UserId);
         Task<Image> Create(Image image);
     }

@@ -26,6 +26,14 @@ namespace ExquisiteImages.Infrastructure.ImageClient
             return images;
         }
 
+        public async Task<Image> GetImg(int id)
+        {
+            HttpResponseMessage httpResponse = await client.GetAsync("/api/home/" + id);
+            string stringResponse = await httpResponse.Content.ReadAsStringAsync();
+            Image image = JsonConvert.DeserializeObject<Image>(stringResponse);
+            return image;
+        }
+
         public async Task<List<Image>> GetByUsers(string UserId)
         {
             HttpResponseMessage response = await client.GetAsync("/api/home/" + UserId);

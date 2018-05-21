@@ -1,0 +1,33 @@
+﻿@model  Image
+
+@{ 
+    Layout = "_Layout";
+    ViewBag.Title = "Image";
+    ViewBag.HeaderTitle = "Image";
+}
+
+
+<div class="row">
+
+    <div class="col-4">
+        <div class="w-50 h-50">
+            <figure class="figure">
+                <img src="@ViewBag.User.ProfilePicture" class="img-fluid rounded" />
+                <figcaption class="figure-caption">
+                    <h5 class="text-center">@ViewBag.User.UserName</h5>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="@Model.Path"/>
+            <div class="card-body">
+                <h3 class="card-title">@Model.Name</h3>
+                <p class="card-text">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+
+</div>
