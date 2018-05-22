@@ -18,6 +18,14 @@ namespace ExquisiteImagesApi.Controllers
             repository = repo;
         }
 
+        [Route("{imgId}")]
+        [HttpGet]
+        public List<Comment> GetCommentsOfImages([FromRoute] int imgId)
+        {
+            List<Comment> comments = repository.CommentsOfImage(imgId);
+            return comments;
+        }
+
         [HttpPost]
         public async Task<Comment> Create([FromBody] Comment model)
         {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExquisiteImagesApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExquisiteImagesApi.Services.Repositories
 {
@@ -15,17 +16,16 @@ namespace ExquisiteImagesApi.Services.Repositories
             dbContext = context;
         }
 
+        public List<Comment> CommentsOfImage(int imgId)
+        {
+            return dbContext.Comments.Where(m => m.ImageId == imgId).ToList();
+        }
+
         public async Task<Comment> Create(Comment model)
         {
-            try
-            {
-                await dbContext.Comments.AddAsync(model);
-                await dbContext.SaveChangesAsync();
-                return model;
-            }catch(Exception e)
-            {
-                throw e;
-            }
+            await dbContext.Comments.AddAsync(model);
+            await dbContext.SaveChangesAsync();
+            return model;
         }
     }
 }

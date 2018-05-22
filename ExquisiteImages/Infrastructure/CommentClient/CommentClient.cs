@@ -16,6 +16,13 @@ namespace ExquisiteImages.Infrastructure.CommentClient
             BaseAddress = new Uri("http://localhost:7001/")
         };
         
+        public async Task<List<Comment>> CommentsOfImg(int imgId)
+        {
+            HttpResponseMessage httpResponseMessage = await client.GetAsync("/api/comment/" + imgId);
+            string stringResponse = await httpResponseMessage.Content.ReadAsStringAsync();
+            List<Comment> comments = JsonConvert.DeserializeObject<List<Comment>>(stringResponse);
+            return comments;
+        }
 
         public async Task<Comment> Create(Comment model)
         {

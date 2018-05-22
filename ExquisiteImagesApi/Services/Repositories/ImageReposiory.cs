@@ -33,7 +33,7 @@ namespace ExquisiteImagesApi.Services.Repositories
 
         public async Task<Image> Image(int id)
         {
-            Image image = await context.Images.Include(m => m.Comments).SingleOrDefaultAsync(m => m.ImageId == id);
+            Image image = await context.Images.SingleOrDefaultAsync(m => m.ImageId == id);
             if(image != null)
             {
                 return image;

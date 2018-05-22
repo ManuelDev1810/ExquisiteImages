@@ -8,8 +8,8 @@ namespace ExquisiteImagesApi.Services.Interfaces
 {
     public interface ICommentRepository
     {
-        //List<Comment> Images();
-        //List<Comment> ImagesOfUser(string UserId);
+        //List<Comment> Comments();
+        List<Comment> CommentsOfImage(int imgId);
         //Task<Comment> Image(int id);
         Task<Comment> Create(Comment model);
         //Task<Comment> Update(Comment image);

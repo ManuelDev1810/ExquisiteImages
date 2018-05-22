@@ -27,7 +27,10 @@ namespace ExquisiteImages.Controllers
                 };
 
                 Comment comment = await commentClient.Create(model);
-                return Ok();
+                if (comment != null)
+                    return RedirectToAction("Img", "Image", new { id = comment.ImageId });
+                else
+                    BadRequest();
             }
             return BadRequest();
         }

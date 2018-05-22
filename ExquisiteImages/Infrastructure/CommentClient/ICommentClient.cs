@@ -8,6 +8,7 @@ namespace ExquisiteImages.Infrastructure.CommentClient
 {
     public interface ICommentClient
     {
+        Task<List<Comment>> CommentsOfImg(int id);
         Task<Comment> Create(Comment comment);
     }
 }
