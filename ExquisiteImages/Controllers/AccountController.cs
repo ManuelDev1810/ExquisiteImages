@@ -54,10 +54,21 @@ namespace ExquisiteImages.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<ViewResult> Profile()
+        public async Task<IActionResult> Profile(string id)
         {
+            AppUser user = null;
             
-            AppUser user = await userManager.FindByNameAsync(User.Identity.Name);
+            if (id != null)
+            {
+                user = await userManager.FindByIdAsync(id);
+            } else if(User.Identity.IsAuthenticated)
+            {
+                user = await userManager.FindByNameAsync(User.Identity.Name);
+            }
+
+            if (user == null)
+                return NotFound();
+
             List<Image> Images = await imageClient.GetByUsers(user.Id);
             user.Images = Images;
             return View(user);

@@ -14,7 +14,7 @@
             <figure class="figure">
                 <img src="@ViewBag.User.ProfilePicture" class="img-fluid rounded" />
                 <figcaption class="figure-caption">
-                    <h5 class="text-center">@ViewBag.User.UserName</h5>
+                    <a  asp-route-id="@Model.UserId" asp-action="Profile" asp-controller="Account"><h5 class="text-center mt-2">@ViewBag.User.UserName</h5></a>
                 </figcaption>
             </figure>
         </div>
