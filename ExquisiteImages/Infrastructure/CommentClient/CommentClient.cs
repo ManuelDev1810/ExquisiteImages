@@ -24,6 +24,14 @@ namespace ExquisiteImages.Infrastructure.CommentClient
             return comments;
         }
 
+        public async Task<List<Comment>> CommentsOfUser(string userId)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync("/api/comment/userComments/" + userId);
+            string stringResponse = await responseMessage.Content.ReadAsStringAsync();
+            List<Comment> comments = JsonConvert.DeserializeObject<List<Comment>>(stringResponse);
+            return comments;
+        }
+
         public async Task<Comment> Create(Comment model)
         {
             string json = JsonConvert.SerializeObject(model);

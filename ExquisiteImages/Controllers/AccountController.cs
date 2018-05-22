@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ExquisiteImages.Models;
 using Microsoft.AspNetCore.Identity;
 using ExquisiteImages.Infrastructure.ImageClient;
+using ExquisiteImages.Infrastructure.CommentClient;
 
 namespace ExquisiteImages.Controllers
 {
@@ -14,12 +15,14 @@ namespace ExquisiteImages.Controllers
         UserManager<AppUser> userManager;
         SignInManager<AppUser> signInManager;
         IImageClient imageClient;
-
-        public AccountController(UserManager<AppUser> ustManager, SignInManager<AppUser> signManager, IImageClient imgClient)
+        ICommentClient commentClient;
+        public AccountController(UserManager<AppUser> ustManager, SignInManager<AppUser> signManager,
+                                IImageClient imgClient, ICommentClient commClient)
         {
             userManager = ustManager;
             signInManager = signManager;
             imageClient = imgClient;
+            commentClient = commClient;
         }
 
         public ViewResult Login(string returnUrl)
@@ -70,7 +73,9 @@ namespace ExquisiteImages.Controllers
                 return NotFound();
 
             List<Image> Images = await imageClient.GetByUsers(user.Id);
+            List<Comment> Comments = await commentClient.CommentsOfUser(user.Id);
             user.Images = Images;
+            user.Comments = Comments;
             return View(user);
         }
     }

@@ -17,6 +17,11 @@
                 </figcaption>
             </figure>
         </div>
+        @foreach(var comment in Model.Comments)
+        {
+            <p>@comment.CommentContent</p>
+
+        }
     </div>
 
     <div class="col-sm-12 col-md-12 col-lg-8">

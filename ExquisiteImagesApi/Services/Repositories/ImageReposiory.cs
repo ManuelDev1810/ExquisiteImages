@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +28,7 @@ namespace ExquisiteImagesApi.Services.Repositories
 
         public List<Image> ImagesOfUser(string UserId)
         {
-           return context.Images.Include(m => m.Comments).Where(m => m.UserId == UserId).ToList();
+           return context.Images.Where(m => m.UserId == UserId).ToList();
         }
 
         public async Task<Image> Image(int id)

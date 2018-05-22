@@ -26,6 +26,14 @@ namespace ExquisiteImagesApi.Controllers
             return comments;
         }
 
+        [Route("userComments/{userId}")]
+        [HttpGet]
+        public List<Comment> GetCommentsOfUser([FromRoute] string userId)
+        {
+            List<Comment> comments = repository.CommentsOfUser(userId);
+            return comments;
+        }
+
         [HttpPost]
         public async Task<Comment> Create([FromBody] Comment model)
         {
