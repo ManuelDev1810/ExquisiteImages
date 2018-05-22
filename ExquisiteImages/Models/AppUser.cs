@@ -10,6 +10,6 @@ namespace ExquisiteImages.Models
     {
         public string ProfilePicture { get; set; }
         public List<Image> Images { get; set; }
-        //public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

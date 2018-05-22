@@ -13,6 +13,10 @@ namespace ExquisiteImages.Models
         public int ImageId { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public string Gender { get; set; }
+        public DateTime Date { get; set; }
+
         public string Path { get; set; }
         [Required]
         public string Description { get; set; }
@@ -20,7 +24,7 @@ namespace ExquisiteImages.Models
         [ForeignKey("UserId")]
         public AppUser User { get; set; }
 
-        //public List<Comment> Comments{ get; set; }
+        public List<Comment> Comments { get; set; }
     }
 
 }

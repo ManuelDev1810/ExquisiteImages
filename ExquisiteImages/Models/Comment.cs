@@ -9,20 +9,18 @@ namespace ExquisiteImages.Models
 {
     public class Comment
     {
-        public int CoomentId { get; set; }
+        public int CommentId { get; set; }
         [Required]
-        public string Gender { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Details { get; set; }
+        public string CommentContent { get; set; }
 
-        //public int ImageId { get; set; }
-        //[ForeignKey("ImageId")]
-        //public Image Image { get; set; }
+        public DateTime Date { get; set; }
 
-        //public string UserId { get; set; }
-        //[ForeignKey("UserId")]
-        //public AppUser User { get; set; }
+        public int ImageId { get; set; }
+        [ForeignKey("ImageId")]
+        public Image Image { get; set; }
+
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public AppUser User { get; set; }
     }
 }

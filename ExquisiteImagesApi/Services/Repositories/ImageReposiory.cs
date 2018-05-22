@@ -15,7 +15,16 @@ namespace ExquisiteImagesApi.Services.Repositories
         {
             context = dbContext;
         }
-        public List<Image> Images() => context.Images.Include(m => m.Comments).ToList();
+        public List<Image> Images()
+        {
+            try
+            {
+                return context.Images.ToList();
+            }catch(Exception e)
+            {
+                throw e;
+            }
+        }
 
         public List<Image> ImagesOfUser(string UserId)
         {

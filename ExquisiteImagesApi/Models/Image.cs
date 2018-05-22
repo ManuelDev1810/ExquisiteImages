@@ -13,9 +13,12 @@ namespace ExquisiteImagesApi.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        public string Gender { get; set; }
+        [Required]
         public string Path { get; set; }
         [Required]
         public string Description { get; set; }
+        public DateTime Date { get; set; }
         [Required]
         public string UserId { get; set; }
 

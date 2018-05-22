@@ -49,6 +49,7 @@ namespace ExquisiteImagesApi
 
             //Dependecy Injection
             services.AddTransient<IImageRepository, ImageReposiory>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
 
             services.AddMvc();
 

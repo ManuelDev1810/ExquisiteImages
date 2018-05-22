@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ExquisiteImages.Infrastructure.ImageClient;
+using ExquisiteImages.Infrastructure.CommentClient;
 
 namespace ExquisiteImages
 {
@@ -38,6 +39,7 @@ namespace ExquisiteImages
 
             //Dependecy Injections
             services.AddTransient<IImageClient, ImageClient>();
+            services.AddTransient<ICommentClient, CommentClient>();
 
             services.AddMvc();
         }

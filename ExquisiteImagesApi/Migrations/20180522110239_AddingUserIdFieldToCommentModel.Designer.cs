@@ -11,9 +11,10 @@ using System;
 namespace ExquisiteImagesApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180522110239_AddingUserIdFieldToCommentModel")]
+    partial class AddingUserIdFieldToCommentModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,12 +26,16 @@ namespace ExquisiteImagesApi.Migrations
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CommentContent")
+                    b.Property<string>("Details")
                         .IsRequired();
 
-                    b.Property<DateTime>("Date");
+                    b.Property<string>("Gender")
+                        .IsRequired();
 
                     b.Property<int>("ImageId");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<string>("UserId");
 
@@ -46,12 +51,7 @@ namespace ExquisiteImagesApi.Migrations
                     b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Date");
-
                     b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<string>("Gender")
                         .IsRequired();
 
                     b.Property<string>("Name")
